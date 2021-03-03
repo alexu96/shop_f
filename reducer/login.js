@@ -13,16 +13,16 @@ export default function(state= initialState, action) {
     switch(type) {
 
         case LOGIN_SUCCESS:
-            AsyncStorage.setItem("token", payload)
+            AsyncStorage.setItem("token", payload.token)
             return {
                 ...state,
                 ...payload,
                 isAuthentication: true,
-                user: payload
+                user: payload.token
             }
 
         case LOGIN_FAIL:
-            AsyncStorage.setItem("token", payload)
+            AsyncStorage.removeItem("token")
             return {
                 ...state,
                 ...payload,

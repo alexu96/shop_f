@@ -14,7 +14,7 @@ export const Login = ({ email, password }) => async dispatch => {
 
   try {
     const res = await axios.post(
-      "http://ed064a9589ef.ngrok.io/users",
+      "http://2886efe0e676.ngrok.io/auth",
       body,
       config
     );
@@ -22,13 +22,9 @@ export const Login = ({ email, password }) => async dispatch => {
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
-    console.log(res.data)
+   
   } catch (err) {
-    const errors = err.response.data.errors;
-
-    if (errors) {
-      errors.forEach(error => Alert.alert(error.msg));
-    }
+   console.log(err)
 
     dispatch({
       type: LOGIN_FAIL

@@ -4,18 +4,26 @@ import {  Button, StyleSheet, TextInput, View } from "react-native";
 import { Login } from "../action/login";
 
 
-const login = ({Login}) => {
+const login = ({Login,navigation}) => {
+
+  const value=useSelector(state=>state.loginReducer.isAuthentication)
+ 
+
+  useEffect(()=>{
+    if(value){
+      navigation.navigate("home")
+    }
+  },[value])
 
   const [text, setText] = useState({
     email : "",
     password: "",
-    access : false
+   
   });
+
+  const {email,password}=text
   
 
-
-  
-  
 
   return (
     <View style={styles.container}>
@@ -32,26 +40,26 @@ const login = ({Login}) => {
         <TextInput
           style={styles.input}
           
-          onChangeText={(text) => setText({
+          onChangeText={(event) => setText({
             ...text,
-            email : text
+            email:event
           })}
           placeholder="email"
         />
 
         <TextInput
           style={styles.input}
-          onChangeText={(text) => setText({
+          onChangeText={(event) => setText({
             ...text,
-            password : text
+            password:event
           })}
           placeholder="password"
         />
         <Button 
         
         onPress={() => {
-          const {email, password} = text 
           Login({email,password})
+          console.log(text)
         }} 
         
         
